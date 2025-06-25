@@ -7,9 +7,9 @@ echo "Starting 99-custom.sh at $(date)" >> $LOGFILE
 uci set firewall.@zone[1].input='ACCEPT'
 
 # 设置主机名映射，解决安卓原生 TV 无法联网的问题
-uci add dhcp domain
-uci set "dhcp.@domain[-1].name=time.android.com"
-uci set "dhcp.@domain[-1].ip=203.107.6.88"
+#uci add dhcp domain
+#uci set "dhcp.@domain[-1].name=time.android.com"
+#uci set "dhcp.@domain[-1].ip=203.107.6.88"
 
 # 检查配置文件pppoe-settings是否存在 该文件由build.sh动态生成
 SETTINGS_FILE="/etc/config/pppoe-settings"
@@ -95,27 +95,27 @@ elif [ "$count" -gt 1 ]; then
 fi
 
 # 添加docker zone
-uci add firewall zone
-uci set firewall.@zone[-1].name='docker'
-uci set firewall.@zone[-1].input='ACCEPT'
-uci set firewall.@zone[-1].output='ACCEPT'
-uci set firewall.@zone[-1].forward='ACCEPT'
-uci set firewall.@zone[-1].device='docker0'
+#uci add firewall zone
+#uci set firewall.@zone[-1].name='docker'
+#uci set firewall.@zone[-1].input='ACCEPT'
+#uci set firewall.@zone[-1].output='ACCEPT'
+#uci set firewall.@zone[-1].forward='ACCEPT'
+#uci set firewall.@zone[-1].device='docker0'
 
 # 添加 forwarding docker -> lan
-uci add firewall forwarding
-uci set firewall.@forwarding[-1].src='docker'
-uci set firewall.@forwarding[-1].dest='lan'
+#uci add firewall forwarding
+#uci set firewall.@forwarding[-1].src='docker'
+#uci set firewall.@forwarding[-1].dest='lan'
 
 # 添加 forwarding docker -> wan
-uci add firewall forwarding
-uci set firewall.@forwarding[-1].src='docker'
-uci set firewall.@forwarding[-1].dest='wan'
+#uci add firewall forwarding
+#uci set firewall.@forwarding[-1].src='docker'
+#uci set firewall.@forwarding[-1].dest='wan'
 
 # 添加 forwarding lan -> docker
-uci add firewall forwarding
-uci set firewall.@forwarding[-1].src='lan'
-uci set firewall.@forwarding[-1].dest='docker'
+#uci add firewall forwarding
+#uci set firewall.@forwarding[-1].src='lan'
+#uci set firewall.@forwarding[-1].dest='docker'
 
 # 设置所有网口可访问网页终端
 uci delete ttyd.@ttyd[0].interface
@@ -126,7 +126,7 @@ uci commit
 
 # 设置编译作者信息
 FILE_PATH="/etc/openwrt_release"
-NEW_DESCRIPTION="Compiled by wukongdaily"
+NEW_DESCRIPTION="Compiled by Myself"
 sed -i "s/DISTRIB_DESCRIPTION='[^']*'/DISTRIB_DESCRIPTION='$NEW_DESCRIPTION'/" "$FILE_PATH"
 
 exit 0
